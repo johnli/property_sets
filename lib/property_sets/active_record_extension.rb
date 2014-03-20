@@ -103,7 +103,10 @@ module PropertySets
           end
 
           def build_default(arg)
-            build(:name => arg.to_s, :value => raw_default(arg))
+            build do |property|
+              property.name  = arg.to_s
+              property.value = raw_default(arg)
+            end
           end
 
           def lookup_without_default(arg)
