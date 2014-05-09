@@ -107,7 +107,11 @@ module PropertySets
           end
 
           def lookup_without_default(arg)
-            detect { |property| property.name.to_sym == arg.to_sym }
+            if loaded?
+              detect { |property| property.name.to_sym == arg.to_sym }
+            else
+              find_by_name(arg)
+            end
           end
 
           if ActiveRecord::VERSION::STRING < "3.2.0"
